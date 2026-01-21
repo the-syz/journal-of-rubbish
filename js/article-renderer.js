@@ -98,7 +98,7 @@ class ArticleRenderer {
         </div>
 
         <div class="article-actions">
-          <a href="/articles/article-${article.id}.html" class="btn-read-more">阅读全文</a>
+          <a href="./articles/article-${article.id}.html" class="btn-read-more">阅读全文</a>
           <button class="btn-action btn-favorite" title="收藏文章">
             <i class="icon-favorite"></i>
           </button>
