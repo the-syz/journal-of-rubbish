@@ -211,7 +211,7 @@ class SearchSuggestions {
     this.hideSuggestions();
 
     // 跳转到搜索结果页面
-    window.location.href = `/search-results.html?q=${encodeURIComponent(query)}`;
+    window.location.href = `./search-results.html?q=${encodeURIComponent(query)}`;
   }
 }
 
