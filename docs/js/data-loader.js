@@ -15,7 +15,7 @@ class ArticleDataManager {
 
     // 2. 从JSON文件加载
     try {
-      const response = await fetch('/data/articles.json');
+      const response = await fetch('./data/articles.json');
       if (!response.ok) throw new Error('Failed to load articles');
 
       const data = await response.json();
