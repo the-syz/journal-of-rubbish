@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>学术文献计量学的新方法与应用 - Journal of Rubbish</title>
+    <meta name="description" content="学术文献计量学作为一门研究学术文献数量特征和变化规律的学科，在大数据时代面临着新的机遇和挑战。本文介绍了学术文献计量学的新方法与应用，探讨了如何利用现代信息技术和数据科学方法，拓展文献计量学的研究领域和方法体系。具体包括：基于网络分析的学术合作模式研究、基于文本挖掘的主题演化分析、基于地理信息系统的科研产出空间分布研究、基于社交媒体数据的学术影响力评估等。同时，我们还展示了这些新方法在科研管理、学科发展规划和学术评价等方面的应用案例。研究结果表明，新方法的应用显著提升了文献计量学的分析能力和应用价值，为学术研究和管理决策提供了更加科学、全面的依据。本文的研究为学术文献计量学的发展提供了新的思路和方法，对推动该学科的创新和应用具有重要意义。" />
+    <meta name="keywords" content="文献计量学, 网络分析, 文本挖掘, 地理信息系统, 社交媒体数据" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/modal.css" />
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+    <style>
+      .article-detail {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .article-header {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .article-header h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+
+      .article-authors {
+        margin-bottom: 20px;
+      }
+
+      .author {
+        margin-bottom: 10px;
+      }
+
+      .author-name {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .author-affiliation {
+        color: #666;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .article-meta span {
+        display: inline-block;
+      }
+
+      .article-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .article-tags .tag {
+        font-size: 14px;
+        padding: 4px 12px;
+        border-radius: 16px;
+      }
+
+      .article-abstract {
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+      }
+
+      .article-abstract h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .article-abstract p {
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .article-keywords {
+        margin-bottom: 40px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .article-content {
+        margin-bottom: 40px;
+      }
+
+      .article-content h2 {
+        font-size: 24px;
+        margin: 30px 0 20px;
+        color: #333;
+      }
+
+      .article-content h3 {
+        font-size: 20px;
+        margin: 25px 0 15px;
+        color: #444;
+      }
+
+      .article-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .article-content ul,
+      .article-content ol {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+
+      .article-content li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+
+      .article-references {
+        margin-bottom: 40px;
+        padding-top: 20px;
+        border-top: 2px solid #eee;
+      }
+
+      .article-references h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .article-references ol {
+        padding-left: 30px;
+      }
+
+      .article-references li {
+        margin-bottom: 15px;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .article-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #555;
+        transform: translateY(-2px);
+      }
+
+      .nav-link.prev::before {
+        content: '←';
+        font-size: 16px;
+      }
+
+      .nav-link.next::after {
+        content: '→';
+        font-size: 16px;
+      }
+
+      .article-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background-color: #555;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: #f0f0f0;
+        color: #333;
+      }
+
+      .btn-secondary:hover {
+        background-color: #e0e0e0;
+        transform: translateY(-2px);
+      }
+
+      .btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      @media (max-width: 768px) {
+        .article-detail {
+          margin: 20px auto;
+          padding: 0 15px;
+        }
+
+        .article-header h1 {
+          font-size: 24px;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .article-navigation {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .nav-link {
+          justify-content: center;
+        }
+
+        .article-actions {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <header class="site-header" id="siteHeader">
+        <!-- 导航内容由JavaScript动态生成 -->
+      </header>
+
+      <main class="main-content" id="mainContent">
+        <article class="article-detail" data-article-id="17">
+          <header class="article-header">
+            <h1 class="article-title">学术文献计量学的新方法与应用</h1>
+
+            <div class="article-authors">
+              <div class="author">
+              <span class="author-name">周三十五</span>
+              <span class="author-affiliation">不存在大学数据科学系</span>
+            </div><div class="author">
+              <span class="author-name">吴三十六</span>
+              <span class="author-affiliation">虚构大学计算机科学与技术学院</span>
+            </div><div class="author">
+              <span class="author-name">郑三十七</span>
+              <span class="author-affiliation">虚拟研究院人工智能研究所</span>
+            </div>
+            </div>
+
+            <div class="article-meta">
+              <span class="publication-date">发表日期: 2025-01-17</span>
+              <span class="doi">DOI: 10.1234/jor.2025.017</span>
+            </div>
+
+                </div>
+          </header>
+
+          <div class="article-abstract">
+            <h2>摘要</h2>
+            <p>学术文献计量学作为一门研究学术文献数量特征和变化规律的学科，在大数据时代面临着新的机遇和挑战。本文介绍了学术文献计量学的新方法与应用，探讨了如何利用现代信息技术和数据科学方法，拓展文献计量学的研究领域和方法体系。具体包括：基于网络分析的学术合作模式研究、基于文本挖掘的主题演化分析、基于地理信息系统的科研产出空间分布研究、基于社交媒体数据的学术影响力评估等。同时，我们还展示了这些新方法在科研管理、学科发展规划和学术评价等方面的应用案例。研究结果表明，新方法的应用显著提升了文献计量学的分析能力和应用价值，为学术研究和管理决策提供了更加科学、全面的依据。本文的研究为学术文献计量学的发展提供了新的思路和方法，对推动该学科的创新和应用具有重要意义。</p>
+          </div>
+
+          <div class="article-keywords"><strong>关键词:</strong> 文献计量学, 网络分析, 文本挖掘, 地理信息系统, 社交媒体数据</div>
+
+          <div class="article-content">
+            <!-- 文章正文 -->
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+
+          <div class="article-references">
+            <h2>参考文献</h2>
+            <ol>
+              <li>Van Eck, N. J.. (2024). New Methods in Bibliometrics and Scientometrics. Journal of Informetrics, 18, 300-315.</li><li>Waltman, L.. (2023). Bibliometric Mapping of Science. Scientometrics, 128, 1500-1520.</li>
+            </ol>
+          </div>
+
+          <div class="article-navigation"><a href="article-16.html" class="nav-link prev">上一篇：基于深度学习的学术论文推荐系统优化</a><a href="article-18.html" class="nav-link next">下一篇：开放科学运动对学术研究的影响分析</a></div>
+
+          <div class="article-actions">
+            <button class="btn btn-primary" disabled>下载PDF（不可用）</button>
+            <button class="btn btn-secondary" disabled>引用本文（不可用）</button>
+            <a href="../index.html" class="btn btn-secondary">返回首页</a>
+          </div>
+        </article>
+      </main>
+
+      <footer class="site-footer" id="siteFooter">
+        <!-- 页脚内容由JavaScript动态生成 -->
+      </footer>
+
+      <div class="modal-overlay" id="modalOverlay" style="display: none">
+        <!-- 弹窗内容由JavaScript动态生成 -->
+      </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/modal.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Journal of Rubbish Articles Schema",
+  "description": "文章数据JSON结构定义",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "期刊标题"
+        },
+        "description": {
+          "type": "string",
+          "description": "期刊描述"
+        },
+        "version": {
+          "type": "string",
+          "description": "数据版本"
+        },
+        "total_articles": {
+          "type": "integer",
+          "description": "文章总数"
+        },
+        "last_updated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "最后更新时间"
+        }
+      },
+      "required": ["title", "description", "version", "total_articles", "last_updated"]
+    },
+    "articles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "文章ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "文章标题"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "作者姓名"
+                },
+                "affiliation": {
+                  "type": "string",
+                  "description": "作者单位"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "作者邮箱（虚假）"
+                },
+                "orcid": {
+                  "type": "string",
+                  "description": "作者ORCID（虚假）"
+                }
+              },
+              "required": ["name", "affiliation"]
+            }
+          },
+          "abstract": {
+            "type": "string",
+            "description": "文章摘要"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "关键词"
+          },
+          "publication_date": {
+            "type": "string",
+            "format": "date",
+            "description": "发表日期"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["被打核心", "垃科院一区silence", "nothing"]
+            },
+            "description": "期刊标签"
+          },
+          "content": {
+            "type": "string",
+            "description": "文章正文"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "authors": {
+                  "type": "string"
+                },
+                "year": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "journal": {
+                  "type": "string"
+                },
+                "volume": {
+                  "type": "string"
+                },
+                "pages": {
+                  "type": "string"
+                }
+              },
+              "required": ["authors", "year", "title", "journal"]
+            },
+            "description": "参考文献"
+          },
+          "doi": {
+            "type": "string",
+            "description": "数字对象标识符"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "authors",
+          "abstract",
+          "keywords",
+          "publication_date",
+          "tags",
+          "content",
+          "references",
+          "doi"
+        ]
+      }
+    }
+  },
+  "required": ["metadata", "articles"]
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>联系我们 - Journal of Rubbish</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <!-- 导航栏 -->
+    <nav class="main-nav">
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <span class="logo-text">Journal of Rubbish</span>
+          <span class="logo-subtitle">垃圾期刊</span>
+        </a>
+
+        <ul class="nav-menu">
+          <li><a href="/" class="nav-link">首页</a></li>
+          <li><a href="/about.html" class="nav-link">关于我们</a></li>
+          <li><a href="/contact.html" class="nav-link active">联系我们</a></li>
+        </ul>
+
+        <div class="nav-search">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="搜索文章或作者..."
+            id="searchInput"
+          />
+          <button class="search-btn" id="searchBtn">搜索</button>
+        </div>
+
+        <button class="mobile-toggle" id="mobileToggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 页面容器 -->
+    <div class="page-container">
+      <!-- 主内容区域 -->
+      <main class="main-content">
+        <!-- 英雄区域 -->
+        <section class="hero-section">
+          <div class="container">
+            <h1>联系我们</h1>
+            <p class="subtitle">Journal of Rubbish - 你论文的最后一条路</p>
+          </div>
+        </section>
+
+        <!-- 联系信息 -->
+        <section class="contact-section">
+          <div class="container">
+            <div class="contact-content">
+              <!-- 联系方式 -->
+              <div class="contact-info">
+                <div class="section-header">
+                  <h2>联系方式</h2>
+                </div>
+
+                <div class="info-items">
+                  <div class="info-item">
+                    <h3>联系人</h3>
+                    <p>沈艺舟</p>
+                  </div>
+                  <div class="info-item">
+                    <h3>邮箱</h3>
+                    <p>18964066828@163.com</p>
+                  </div>
+                  <div class="info-item">
+                    <h3>电话</h3>
+                    <p>18964066828</p>
+                  </div>
+                  <div class="info-item">
+                    <h3>地址</h3>
+                    <p>华东理工大学实验十楼111室</p>
+                  </div>
+                  <div class="info-item">
+                    <h3>办公时间</h3>
+                    <p>周一至周五: 9:00 - 17:00</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 联系表单 -->
+              <div class="contact-form">
+                <div class="section-header">
+                  <h2>发送消息</h2>
+                </div>
+
+                <form id="contactForm">
+                  <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" name="email" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="subject">主题</label>
+                    <input type="text" id="subject" name="subject" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="message">消息</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                  </div>
+                  <button type="submit" class="btn-submit">发送消息</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- 页脚 -->
+      <footer class="site-footer">
+        <div class="footer-container">
+          <div class="footer-section">
+            <h3>Journal of Rubbish</h3>
+            <p>一个虚构的学术期刊投稿网站，仅供娱乐用途</p>
+          </div>
+
+          <div class="footer-section">
+            <h4>快速链接</h4>
+            <ul>
+              <li><a href="/">首页</a></li>
+              <li><a href="/about.html">关于我们</a></li>
+              <li><a href="/contact.html">联系我们</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h4>期刊标签</h4>
+            <div class="footer-tags">
+              <span class="tag tag-core">被打核心</span>
+              <span class="tag tag-silence">垃科院一区silence</span>
+              <span class="tag tag-nothing">nothing</span>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2025 Journal of Rubbish. 本网站内容纯属虚构，仅供娱乐。</p>
+            <p>虚假备案号：京ICP备12345678号-1</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script>
+      // 联系表单提交处理
+      document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // 获取表单数据
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        // 模拟表单提交
+        alert(
+          '消息已发送！\n\n姓名: ' +
+            name +
+            '\n邮箱: ' +
+            email +
+            '\n主题: ' +
+            subject +
+            '\n消息: ' +
+            message
+        );
+
+        // 重置表单
+        this.reset();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}} - Journal of Rubbish</title>
+    <meta name="description" content="{{abstract}}" />
+    <meta name="keywords" content="{{keywords.join(', ')}}" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/modal.css" />
+    <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+    <style>
+      .article-detail {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .article-header {
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #eee;
+      }
+
+      .article-header h1 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 20px;
+        line-height: 1.3;
+      }
+
+      .article-authors {
+        margin-bottom: 20px;
+      }
+
+      .author {
+        margin-bottom: 10px;
+      }
+
+      .author-name {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .author-affiliation {
+        color: #666;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .article-meta span {
+        display: inline-block;
+      }
+
+      .article-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .article-tags .tag {
+        font-size: 14px;
+        padding: 4px 12px;
+        border-radius: 16px;
+      }
+
+      .article-abstract {
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+      }
+
+      .article-abstract h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .article-abstract p {
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .article-keywords {
+        margin-bottom: 40px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .article-content {
+        margin-bottom: 40px;
+      }
+
+      .article-content h2 {
+        font-size: 24px;
+        margin: 30px 0 20px;
+        color: #333;
+      }
+
+      .article-content h3 {
+        font-size: 20px;
+        margin: 25px 0 15px;
+        color: #444;
+      }
+
+      .article-content p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .article-content ul,
+      .article-content ol {
+        margin: 15px 0;
+        padding-left: 30px;
+      }
+
+      .article-content li {
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+
+      .article-references {
+        margin-bottom: 40px;
+        padding-top: 20px;
+        border-top: 2px solid #eee;
+      }
+
+      .article-references h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .article-references ol {
+        padding-left: 30px;
+      }
+
+      .article-references li {
+        margin-bottom: 15px;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .article-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #333;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #555;
+        transform: translateY(-2px);
+      }
+
+      .nav-link.prev::before {
+        content: '←';
+        font-size: 16px;
+      }
+
+      .nav-link.next::after {
+        content: '→';
+        font-size: 16px;
+      }
+
+      .article-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background-color: #333;
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background-color: #555;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background-color: #f0f0f0;
+        color: #333;
+      }
+
+      .btn-secondary:hover {
+        background-color: #e0e0e0;
+        transform: translateY(-2px);
+      }
+
+      .btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      @media (max-width: 768px) {
+        .article-detail {
+          margin: 20px auto;
+          padding: 0 15px;
+        }
+
+        .article-header h1 {
+          font-size: 24px;
+        }
+
+        .article-meta {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .article-navigation {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .nav-link {
+          justify-content: center;
+        }
+
+        .article-actions {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <header class="site-header" id="siteHeader">
+        <!-- 导航内容由JavaScript动态生成 -->
+      </header>
+
+      <main class="main-content" id="mainContent">
+        <article class="article-detail" data-article-id="{{id}}">
+          <header class="article-header">
+            <h1 class="article-title">{{title}}</h1>
+
+            <div class="article-authors">
+              {{#each authors}}
+              <div class="author">
+                <span class="author-name">{{name}}</span>
+                <span class="author-affiliation">{{affiliation}}</span>
+              </div>
+              {{/each}}
+            </div>
+
+            <div class="article-meta">
+              <span class="publication-date">发表日期: {{publication_date}}</span>
+              <span class="doi">DOI: {{doi}}</span>
+            </div>
+
+                </div>
+          </header>
+
+          <div class="article-abstract">
+            <h2>摘要</h2>
+            <p>{{abstract}}</p>
+          </div>
+
+          <div class="article-keywords"><strong>关键词:</strong> {{keywords.join(', ')}}</div>
+
+          <div class="article-content">
+            <!-- 文章正文 -->
+            {{content}}
+          </div>
+
+          <div class="article-references">
+            <h2>参考文献</h2>
+            <ol>
+              {{#each references}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ol>
+          </div>
+
+          <div class="article-navigation">
+            {{#if prevArticle}}
+            <a href="article-{{prevArticle.id}}.html" class="nav-link prev"
+              >上一篇：{{prevArticle.title}}</a
+            >
+            {{else}}
+            <span class="nav-link disabled">没有上一篇</span>
+            {{/if}} {{#if nextArticle}}
+            <a href="article-{{nextArticle.id}}.html" class="nav-link next"
+              >下一篇：{{nextArticle.title}}</a
+            >
+            {{else}}
+            <span class="nav-link disabled">没有下一篇</span>
+            {{/if}}
+          </div>
+
+          <div class="article-actions">
+            <button class="btn btn-primary" disabled>下载PDF（不可用）</button>
+            <button class="btn btn-secondary" disabled>引用本文（不可用）</button>
+            <a href="../index.html" class="btn btn-secondary">返回首页</a>
+          </div>
+        </article>
+      </main>
+
+      <footer class="site-footer" id="siteFooter">
+        <!-- 页脚内容由JavaScript动态生成 -->
+      </footer>
+
+      <div class="modal-overlay" id="modalOverlay" style="display: none">
+        <!-- 弹窗内容由JavaScript动态生成 -->
+      </div>
+    </div>
+
+    <script src="../js/main.js" defer></script>
+    <script src="../js/search.js" defer></script>
+    <script src="../js/modal.js" defer></script>
+  </body>
+</html>

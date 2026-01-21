@@ -1,0 +1,31 @@
+{
+  "name": "journal-of-rubbish",
+  "version": "1.0.0",
+  "description": "Journal of Rubbish - 虚假学术期刊投稿网站",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html about.html contact.html articles/article-*.html",
+    "build:prod": "parcel build index.html about.html contact.html articles/article-*.html --public-url ./ --dist-dir dist",
+    "build:analyze": "parcel build index.html --reporter @parcel/reporter-bundle-analyzer",
+    "preview:prod": "serve dist -p 3000",
+    "preview": "parcel preview"
+  },
+  "parcel": {
+    "source": ".",
+    "distDir": "dist",
+    "publicUrl": "./",
+    "cacheDir": ".parcel-cache"
+  },
+  "lint-staged": {
+    "*.{js,css,html}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "parcel": "^2.16.3",
+    "serve": "^14.2.5"
+  }
+}

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Journal of Rubbish - 一个虚构的学术期刊投稿网站，仅供娱乐" />
+    <meta name="keywords" content="学术期刊,投稿,虚假期刊,娱乐网站" />
+    <title>Journal of Rubbish - 首页</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="page-container">
+      <!-- 头部导航区域 -->
+      <header class="site-header" id="siteHeader">
+        <nav class="main-nav">
+          <div class="container">
+            <div class="nav-container">
+              <a href="/" class="logo">
+                <span class="logo-text">Journal of Rubbish</span>
+                <span class="logo-subtitle">垃圾期刊</span>
+              </a>
+
+              <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">首页</a></li>
+                <li><a href="/about.html" class="nav-link">期刊介绍</a></li>
+                <li><a href="/contact.html" class="nav-link">联系我们</a></li>
+              </ul>
+
+              <div class="nav-search">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="搜索文章标题或作者..."
+                    autocomplete="off"
+                  />
+                  <button class="search-btn" id="searchBtn">
+                    <i class="icon-search"></i>
+                  </button>
+
+                  <!-- 搜索建议下拉框 -->
+                  <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                      <span>最近搜索</span>
+                      <button class="clear-history">清除</button>
+                    </div>
+                    <ul class="suggestions-list" id="suggestionsList">
+                      <!-- 动态生成 -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button class="mobile-toggle" id="mobileToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <!-- 主内容区域 -->
+      <main class="main-content" id="mainContent">
+        <div class="container">
+          <section class="hero-section">
+            <h1>Journal of Rubbish</h1>
+            <p class="subtitle">你论文的最后一条路</p>
+            <div class="journal-tags">
+              <span class="tag tag-core">被打核心</span>
+              <span class="tag tag-silence">垃科院一区silence</span>
+              <span class="tag tag-nothing">nothing</span>
+            </div>
+          </section>
+
+          <section class="articles-section">
+            <div class="section-header">
+              <h2>最新文章</h2>
+            </div>
+
+            <div class="articles-grid" id="articlesGrid">
+              <!-- 文章卡片由JavaScript动态生成 -->
+              <div class="loading">加载文章中...</div>
+            </div>
+
+            <div class="load-more">
+              <button id="loadMoreBtn" class="btn-load-more">加载更多</button>
+            </div>
+          </section>
+
+          <section class="function-entries">
+            <h2 class="section-title">功能入口</h2>
+            <div class="entries-grid">
+              <button class="entry-btn" id="authorEntry" data-type="author">
+                <i class="icon-author"></i>
+                <span class="entry-title">作者入口</span>
+                <span class="entry-desc">提交稿件、查看审稿状态</span>
+              </button>
+
+              <button class="entry-btn" id="editorEntry" data-type="editor">
+                <i class="icon-editor"></i>
+                <span class="entry-title">编辑入口</span>
+                <span class="entry-desc">管理稿件、分配审稿人</span>
+              </button>
+
+              <button class="entry-btn" id="expertEntry" data-type="expert">
+                <i class="icon-expert"></i>
+                <span class="entry-title">专家入口</span>
+                <span class="entry-desc">审阅稿件、提交评审意见</span>
+              </button>
+
+              <button class="entry-btn" id="downloadCenter" data-type="download">
+                <i class="icon-download"></i>
+                <span class="entry-title">下载中心</span>
+                <span class="entry-desc">下载模板、指南、往期文章</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- 页脚区域 -->
+      <footer class="site-footer" id="siteFooter">
+        <div class="container">
+          <div class="footer-container">
+            <div class="footer-section">
+              <h3>Journal of Rubbish</h3>
+              <p>一个虚构的学术期刊投稿网站，仅供娱乐用途</p>
+            </div>
+
+            <div class="footer-section">
+              <h4>快速链接</h4>
+              <ul>
+                <li><a href="/">首页</a></li>
+                <li><a href="/about.html">期刊介绍</a></li>
+                <li><a href="/contact.html">联系我们</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-section">
+              <h4>期刊标签</h4>
+              <div class="footer-tags">
+                <span class="tag tag-core">被打核心</span>
+                <span class="tag tag-silence">垃科院一区silence</span>
+                <span class="tag tag-nothing">nothing</span>
+              </div>
+            </div>
+
+            <div class="footer-bottom">
+              <p>&copy; 2025 Journal of Rubbish. 本网站内容纯属虚构，仅供娱乐。</p>
+              <p>虚假备案号：京ICP备12345678号-1</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- 弹窗遮罩层 -->
+      <div class="modal-overlay" id="modalOverlay" aria-hidden="true" style="display: none">
+        <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <div class="modal-header">
+            <h3 id="modalTitle">系统提示</h3>
+            <button class="modal-close" aria-label="关闭弹窗">&times;</button>
+          </div>
+
+          <div class="modal-content" id="modalContent">
+            <!-- 动态内容 -->
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-confirm" id="modalConfirm">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/main.js"></script>
+    <script src="js/article-renderer.js" defer></script>
+    <script src="js/search.js" defer></script>
+  </body>
+</html>

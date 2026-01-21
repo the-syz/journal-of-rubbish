@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>搜索结果 - Journal of Rubbish</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* 搜索结果页面特定样式 */
+      .search-results-header {
+        text-align: center;
+        padding: 40px 0 20px;
+        background-color: #f8f9fa;
+        margin-bottom: 40px;
+      }
+
+      .search-query {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .search-stats {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .search-results-section {
+        max-width: 800px;
+        margin: 0 auto 40px;
+      }
+
+      .search-result-item {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+      }
+
+      .search-result-item:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .result-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .result-title a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .result-title a:hover {
+        color: #555;
+      }
+
+      .result-meta {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .result-authors {
+        margin-bottom: 5px;
+      }
+
+      .result-date {
+        font-size: 12px;
+        color: #999;
+      }
+
+      .result-excerpt {
+        font-size: 14px;
+        color: #444;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .result-highlight {
+        background-color: #ffeb3b;
+        color: #333;
+        padding: 0 2px;
+        border-radius: 2px;
+      }
+
+      .result-score {
+        font-size: 12px;
+        color: #999;
+        text-align: right;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 80px 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin: 40px 0;
+      }
+
+      .no-results-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .no-results h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .no-results p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 30px;
+      }
+
+      .back-home-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #555;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .back-home-btn:hover {
+        background-color: #666;
+        transform: translateY(-2px);
+      }
+
+      .search-results-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 40px 0;
+        gap: 10px;
+      }
+
+      .pagination-btn {
+        padding: 8px 16px;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .pagination-btn:hover:not(:disabled) {
+        background-color: #e0e0e0;
+      }
+
+      .pagination-btn.active {
+        background-color: #555;
+        color: #fff;
+        border-color: #555;
+      }
+
+      .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .pagination-info {
+        font-size: 14px;
+        color: #666;
+        margin: 0 10px;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+        .search-results-header {
+          padding: 30px 0 15px;
+        }
+
+        .search-query {
+          font-size: 20px;
+        }
+
+        .search-results-section {
+          padding: 0 20px;
+        }
+
+        .search-result-item {
+          padding: 15px;
+        }
+
+        .result-title {
+          font-size: 16px;
+        }
+
+        .no-results {
+          padding: 60px 20px;
+        }
+
+        .no-results h2 {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <!-- 头部导航 -->
+      <header class="site-header">
+        <div class="container">
+          <div class="header-content">
+            <div class="header-left">
+              <a href="index.html" class="logo">
+                <h1>Journal of Rubbish</h1>
+              </a>
+            </div>
+
+            <nav class="main-nav">
+              <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="about.html" class="nav-link">期刊介绍</a></li>
+                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+              </ul>
+
+              <div class="nav-search">
+                <div class="search-container">
+                  <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="搜索文章标题或作者..."
+                    autocomplete="off"
+                  />
+                  <button class="search-btn" id="searchBtn">
+                    <i class="icon-search"></i>
+                  </button>
+
+                  <!-- 搜索建议下拉框 -->
+                  <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                      <span>最近搜索</span>
+                      <button class="clear-history">清除</button>
+                    </div>
+                    <ul class="suggestions-list" id="suggestionsList">
+                      <!-- 动态生成 -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <button class="mobile-toggle" id="mobileToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <!-- 主要内容 -->
+      <main class="main-content">
+        <!-- 搜索结果头部 -->
+        <section class="search-results-header">
+          <div class="container">
+            <h1 class="search-query" id="searchQuery">
+              搜索: <span id="queryText">加载中...</span>
+            </h1>
+            <p class="search-stats" id="searchStats">
+              共 <span id="totalResults">0</span> 条结果，用时 <span id="searchTime">0</span> 毫秒
+            </p>
+          </div>
+        </section>
+
+        <!-- 搜索结果 -->
+        <section class="search-results-section" id="searchResultsSection">
+          <div class="container">
+            <!-- 搜索结果列表 -->
+            <div class="search-results-list" id="searchResultsList">
+              <!-- 动态生成 -->
+            </div>
+
+            <!-- 无结果状态 -->
+            <div class="no-results" id="noResults" style="display: none">
+              <div class="no-results-icon">🔍</div>
+              <h2>未找到相关结果</h2>
+              <p>抱歉，没有找到与 "<span id="noResultsQuery"></span>" 相关的文章</p>
+              <a href="index.html" class="back-home-btn">返回首页</a>
+            </div>
+
+            <!-- 分页控件 -->
+            <div class="search-results-pagination" id="pagination" style="display: none">
+              <button class="pagination-btn" id="prevPage" disabled>上一页</button>
+              <span class="pagination-info"
+                >第 <span id="currentPage">1</span> / <span id="totalPages">1</span> 页</span
+              >
+              <button class="pagination-btn" id="nextPage" disabled>下一页</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- 页脚 -->
+      <footer class="site-footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-logo">
+              <h2>Journal of Rubbish</h2>
+              <p>全球最权威的垃圾研究期刊</p>
+            </div>
+
+            <div class="footer-links">
+              <div class="footer-column">
+                <h3>快速链接</h3>
+                <ul>
+                  <li><a href="index.html">首页</a></li>
+                  <li><a href="about.html">期刊介绍</a></li>
+                  <li><a href="contact.html">联系我们</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-column">
+                <h3>分类</h3>
+                <ul>
+                  <li><a href="index.html#tag-被打核心">被打核心</a></li>
+                  <li><a href="index.html#tag-垃科院一区silence">垃科院一区silence</a></li>
+                  <li><a href="index.html#tag-nothing">nothing</a></li>
+                </ul>
+              </div>
+
+              <div class="footer-column">
+                <h3>联系我们</h3>
+                <ul>
+                  <li>邮箱: editor@journalofrubbish.com</li>
+                  <li>电话: +86 123 4567 8910</li>
+                  <li>地址: 北京市海淀区垃圾街123号</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>&copy; 2025 Journal of Rubbish. 本网站内容纯属虚构，仅供娱乐。</p>
+            <p>虚假备案号：京ICP备12345678号-1</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- JavaScript文件 -->
+    <script src="js/main.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/article-renderer.js" defer></script>
+    <script src="js/modal.js" defer></script>
+    <script src="js/search-results.js" defer></script>
+  </body>
+</html>
